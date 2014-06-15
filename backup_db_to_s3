@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Pass the database dump as an argument
+# ./backup_db_to_s3 backups/db.dump
+#
+# The AWS configuration should be set up in the env variables:
+# AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
+#
+# AWS_BACKUP_PATH should contain the bucket and a prefix if required, with no trailing slash
+# If the bucket is called 'backup-bucket', AWS_BACKUP_PATH should be set to 'backup-bucket'
+# If the backups should be in the folder 'files', it should be set to 'backup-bucket/files'
+#
+# This script copies the file to the bucket, setting the filename to db-backup-[current-time]
+
+FROM_PATH=$1
+S3_PATH="s3://$AWS_BACKUP_PATH/db-backup-$(date +%F-%H-%M-%S).dump"
+
+echo -e "\n** Backing up $FROM_PATH to $S3_PATH **"
+aws s3 cp $FROM_PATH $S3_PATH

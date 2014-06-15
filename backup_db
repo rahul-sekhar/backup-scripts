@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Pass the file to dump the database to as an argument
+# ./backup_db backups/db.dump
+#
+# The database configuration should be set up in the env variables:
+# DB_NAME, DB_USER, DB_PASSWORD, DB_HOST
+#
+# The database adapter should be set in the env variable DB_ADAPTER
+# Supported values are POSTGRESQL and MYSQL
+
+if [ $DB_ADAPTER = "MYSQL" ]
+  then
+
+  echo "Backing up MySQL database"
+  BACKUP_COMMAND="mysqldump -u$DB_USER -p$DB_PASSWORD -h$DB_HOST $DB_NAME -C -c --skip-add-locks > $1"
+  echo $BACKUP_COMMAND
+  eval $BACKUP_COMMAND
+
+elif [ $DB_ADAPTER = "POSTGRESQL" ]
+  then
+
+  echo "Backing up PostgreSQL database"
+  BACKUP_COMMAND="PGPASSWORD=$DB_PASSWORD pg_dump --format=custom -U$DB_USER -h$DB_HOST $DB_NAME -f $1"
+  echo $BACKUP_COMMAND
+  eval $BACKUP_COMMAND
+
+else
+  echo "Database adapter '$DB_ADAPTER' not recognised. Please use either MYSQL or POSTGRESQL"
+  exit 1
+fi

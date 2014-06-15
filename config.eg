@@ -1,0 +1,26 @@
+# AWS configuration
+AWS_ACCESS_KEY_ID="..."
+AWS_SECRET_ACCESS_KEY="..."
+AWS_DEFAULT_REGION="us-east-1"
+
+# S3 paths to backup to
+AWS_FILE_BACKUP_PATH="bucket/folder"
+AWS_DB_BACKUP_PATH="bucket/folder"
+
+# Application root
+APP_ROOT="/path/to/root"
+
+# Folders to backup (space separated, relative to app root)
+BACKUP_FOLDERS="path/to/folder path/to/other/folder"
+
+# Temporary path to store database backup
+BACKUP_TMP="$APP_ROOT/backups"
+
+# Database info
+DB_NAME="database-name"
+DB_USER="user"
+DB_PASSWORD="..."
+DB_HOST="localhost"
+
+# Database adapter - supported values are POSTGRESQL and MYSQL
+DB_ADAPTER="POSTGRESQL"
