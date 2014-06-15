@@ -6,8 +6,9 @@ set -e
 # Load configuration
 source ./config
 
-# Store script path
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Script paths
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$CURRENT_DIR/script"
 
 cd $APP_ROOT
 
