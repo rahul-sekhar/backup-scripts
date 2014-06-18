@@ -6,6 +6,8 @@
 # The AWS configuration should be set up in the env variables:
 # AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
 #
+# if AWS_CLI_COMMAND, it is used as the path for the aws cli executable
+#
 # AWS_BACKUP_PATH should contain the bucket and a prefix if required, with no trailing slash
 # If the bucket is called 'backup-bucket', AWS_BACKUP_PATH should be set to 'backup-bucket'
 # If the backups should be in the folder 'files', it should be set to 'backup-bucket/files'
@@ -13,10 +15,11 @@
 # This script syncs the folders to the S3 bucket, deleting any removed files. Versioning should
 # be enabled on the bucket for proper backing up
 
+AWS_CLI_COMMAND=${AWS_CLI_COMMAND-'aws'}
 for FROM_PATH in $@
 do
   S3_PATH="s3://$AWS_BACKUP_PATH/$FROM_PATH"
   echo -e "\n** Syncing $FROM_PATH to $S3_PATH **"
 
-  aws s3 sync $FROM_PATH $S3_PATH --delete
+  $AWS_CLI_COMMAND s3 sync $FROM_PATH $S3_PATH --delete
 done
