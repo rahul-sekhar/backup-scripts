@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-echo "** Running backup scripts for ${APP_NAME} **"
-date
-
 # Script paths
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPT_DIR="$CURRENT_DIR/script"
 
 # Load configuration
 source "$CURRENT_DIR/config"
+
+echo "** Running backup scripts for ${APP_NAME} **"
+date
 
 cd $APP_ROOT
 
