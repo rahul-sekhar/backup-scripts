@@ -15,7 +15,8 @@
 # This script copies the file to the bucket, setting the filename to db-backup-[current-time]
 
 FROM_PATH=$1
-S3_PATH="s3://$AWS_BACKUP_PATH/db-backup-$(date +%F-%H-%M-%S).dump"
+FILENAME=$(basename $1)
+S3_PATH="s3://$AWS_BACKUP_PATH/$FILENAME"
 AWS_CLI_COMMAND=${AWS_CLI_COMMAND-'aws'}
 
 echo -e "\n** Backing up $FROM_PATH to $S3_PATH **"
