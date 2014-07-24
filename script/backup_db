@@ -13,14 +13,14 @@ if [ $DB_ADAPTER = "MYSQL" ]
   then
 
   echo "Backing up MySQL database"
-  BACKUP_COMMAND="mysqldump -u$DB_USER -p$DB_PASSWORD -h$DB_HOST $DB_NAME -C -c --skip-add-locks > $1"
+  BACKUP_COMMAND="mysqldump -u$DB_USER -p'$DB_PASSWORD' -h$DB_HOST $DB_NAME -C -c --skip-add-locks > $1"
   eval $BACKUP_COMMAND
 
 elif [ $DB_ADAPTER = "POSTGRESQL" ]
   then
 
   echo "Backing up PostgreSQL database"
-  BACKUP_COMMAND="PGPASSWORD=$DB_PASSWORD pg_dump --format=custom -U$DB_USER -h$DB_HOST $DB_NAME -f $1"
+  BACKUP_COMMAND="PGPASSWORD='$DB_PASSWORD' pg_dump --format=custom -U$DB_USER -h$DB_HOST $DB_NAME -f $1"
   eval $BACKUP_COMMAND
 
 else
