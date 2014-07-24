@@ -9,7 +9,9 @@ Then setup a cronjob to run the `backup` script.
 AWS IAM Permissions
 -------------------
 For the contents of the database backup bucket(`arn:aws:s3:::bucket/*`), `s3:PutObject`
+
 For the contents of the files backup bucket(`arn:aws:s3:::bucket/*`), `s3:PutObject`, `s3:DeleteObject`
+
 For the files backup bucket(`arn:aws:s3:::bucket`), `s3:ListBucket`
 
 Dependencies
